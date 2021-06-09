@@ -9,6 +9,11 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 20,
   },
+  flashcard: {
+    height: 40,
+    margin: 12,
+    borderWidth: 1,
+  }
 })
 
 export {styles}

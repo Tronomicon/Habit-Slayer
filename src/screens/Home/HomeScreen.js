@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { View, Text} from 'react-native';
+import { View, Text, TextInput} from 'react-native';
 
 import {styles} from '../../styles/homeScreenStyles.js';
 
@@ -17,6 +17,11 @@ class HomeScreen extends Component {
         <Text style={styles.headerText}>
           Welcome to Habit Slayer
         </Text>
+        <TextInput
+          style={styles.flashcard}
+          placeholder='Enter your goal'
+        />
+
       </View>
     )
   }
