@@ -20,7 +20,7 @@ function Detail(props) {
         
         <TouchableOpacity
             style={styles.buttonContainer}
-            onPress={() => navigation.navigate('Settings')}>
+            onPress={() => navigation.navigate('CompletedTasks')}>
         <Text style={styles.buttonText}> Go to settings</Text>
         </TouchableOpacity>
         </View>

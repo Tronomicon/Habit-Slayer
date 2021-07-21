@@ -15,9 +15,10 @@ function Home(props) {
     return (
         <ImageBackground 
         source={image}
-         style={styles.backgroundImage} >
+         style={styles.backgroundImage}>
+
     <View style={styles.container}>
-        <Text style={styles.text}>Habit Slayer Home page</Text>
+        <Text style={styles.text}>Home page</Text>
         
         <TouchableOpacity
             style={styles.buttonContainer}
@@ -38,6 +39,12 @@ function Home(props) {
             style={styles.buttonContainer2}
             onPress={() => navigation.navigate('CharacterPreview')}>
         <Text style={styles.text}>Character Preview</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+            style={styles.buttonContainer2}
+            onPress={() => navigation.navigate('RoadMap')}>
+        <Text style={styles.text}>RoadMap</Text>
         </TouchableOpacity>
 
         <View style={styles.buttonContainer3}>
@@ -93,7 +100,7 @@ const styles = StyleSheet.create({
     buttonContainer2: {
         alignItems: 'center',
         justifyContent: 'space-evenly',
-        height: 150,
+        height: 75,
         width:350,
         backgroundColor: 'transparent',
         padding: 10,
