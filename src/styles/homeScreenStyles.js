@@ -9,10 +9,14 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 20,
   },
+  taskText: {
+    fontSize: 15,
+  },
   flashcard: {
     height: 40,
     margin: 12,
-    borderWidth: 1,
+    borderWidth: 5,
+    borderColor: 'green',
   }
 })
 
