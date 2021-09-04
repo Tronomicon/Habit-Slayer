@@ -1,7 +1,7 @@
 import * as firebase from 'firebase';
-
 import config from "./api_keys.js";
 
+//creating local constant variables with imported config data
 const API_KEY = config.firebase_api_key;
 const AUTH_DOMAIN = config.firebase_authDomain;
 const DATABASE_URL = config.firebase_databaseURL;
@@ -11,9 +11,7 @@ const MESSAGING_SENDER_ID = config.firebase_messagingSenderId;
 const APP_ID = config.firebase_appId;
 const MEASUREMENT_ID = config.firebase_measurementId;
 
-// console.log("api key:", API_KEY);
-// console.log("AUTH:", AUTH_DOMAIN);
-
+//creating a firebaseConfig object with the config data as properties
 const firebaseConfig = {
   apiKey: API_KEY,
   authDomain: AUTH_DOMAIN,
