@@ -1,6 +1,7 @@
 import React from 'react'
 import { StyleSheet, View, Text, TouchableOpacity, ImageBackground,Image } from 'react-native'
 import { startClock } from 'react-native-reanimated'
+import Slideshow from 'react-native-image-slider-show';
 
 function Settings(props) {
 
@@ -18,10 +19,7 @@ function Settings(props) {
 
       <View style={styles.containerCharacter}>
 
-      <Image
-      source={{ uri: 'https://koenig-media.raywenderlich.com/uploads/2012/06/PixelArtTutorial.png' }}
-      style={{ width: 300, height: 300 }}
-      />
+    
 
        </View>
 
