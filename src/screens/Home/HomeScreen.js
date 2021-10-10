@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 
-import { View, Text, TextInput, Button, TouchableHighlight, FlatList} from 'react-native';
+import { View, Text, TextInput, Button, TouchableHighlight, FlatList, KeyboardAvoidingView, TouchableOpacity, Keyboard, ScrollView} from 'react-native';
 
+import {v4 as uuidv4} from 'uuid';
 import {styles} from '../../styles/homeScreenStyles.js';
+import Task from '../../components/Tasks.js';
 
-import {firebase} from '../../firebase/config'
+import {firebase} from '../../firebase/config';
 import 'firebase/firestore';
 
 
@@ -13,16 +15,16 @@ class HomeScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      goalPlaceholder: 'Filler',
-      refreshing: false
+      refreshing: false,
+      task: 'Filler data',
+      taskItems: [],
+      taskID: 'Filler ID',
+      toBeDeleted: 'Filler'
     };
   }
 
-  //when first opnening app, getting task data from firestore via get
+  //when first opening app, getting task data from firestore via get
   async componentDidMount() {
-    let tempTasks = ["Task1", "Task2", "Task3"];
-    this.setState({tasks: tempTasks});
-
     //need for onRefresh prop
     this.setState({refreshing:true})
     let taskList=[];
@@ -37,8 +39,8 @@ class HomeScreen extends Component {
         })
         return 1;
       });
-    this.setState({tempDoc: taskList, refreshing:false});
-    console.log("Doc: ", this.state.tempDoc)
+    this.setState({taskItems: taskList, refreshing:false});
+    console.log("Doc: ", this.state.taskItems)
   }
 
   async onRefresh(){
@@ -58,53 +60,109 @@ class HomeScreen extends Component {
     this.setState({tempDoc: taskList, refreshing:false});
   }
 
-  //updates the state with the user text input
-  _handleTextChange = event => {
-    let newGoal = event.nativeEvent.text;
-    this.setState({goalPlaceholder: newGoal})
-    console.log("New goal to be added: ", newGoal)
+  //when button is pressed, adds the new task to the list of taskItems and saves to firebase
+  async _handleAddTask() {
+    const docs = await
+    Keyboard.dismiss();
+    this._saveToFirebase()
+    let {taskItems} = this.state
+    let {task} = this.state
+    taskItems.push({task})
+    this.setState({taskItems: taskItems})
+  }
 
+  //when task item is touched: copies taskItems, remove item in copy at that index, updates taskItems
+  _handleTaskCompleted(index) {
+
+    let tasksCopy = [...this.state.taskItems]
+    //console.log("index", tasksCopy[index].id, index)
+    this.setState({taskItems: tasksCopy})
+    this.setState({toBeDeleted: tasksCopy[index].id})
+    this._deleteFromFirebase()
+    tasksCopy.splice(index, 1)
+    this.setState({taskItems: tasksCopy})
+
+  }
+
+  async _deleteFromFirebase() {
+      const docs = await
+      console.log("tobeDeletedID", this.state.toBeDeleted)
+      firebase.firestore()
+      .collection("Tasks")
+      .doc(this.state.toBeDeleted).delete()
+      .then(() => console.log("delete successful")).catch((error)=> console.log(error))
   }
 
   //when button pressed: updates the state data to the cloud via set
   _saveToFirebase() {
     const dbh = firebase.firestore();
     dbh.collection("Tasks")
-    .doc("tempDoc")
+    .doc(this.state.taskID)
     .set({
-      description: this.state.goalPlaceholder,
-      discipline: "School"
+      task: this.state.task,
+      id: this.state.taskID
     });
-
     console.log("Saved to firebase!")
+  }
+
+  _handleTextChange(taskData) {
+    this.setState({task:taskData})
+    let id = uuidv4();
+    this.setState({taskID:id})
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.headerText}>
-          Welcome to Habit Slayer
-        </Text>
-        <TextInput
-          style={styles.flashcard}
-          placeholder='Enter your goal'
-          onSubmitEditing={event => this._handleTextChange(event)}
-        />
-        <Button
-          title="Update new goal"
-          onPress={event => this._saveToFirebase(event)}
-        />
-        <Text style={styles.headerText}>
-          {this.state.tasks}
-        </Text>
+        <View style={styles.headerWrapper}>
+          <Text style={styles.headerText}>
+            Welcome to Habit Slayer
+          </Text>
+        </View>
+
+        <ScrollView
+        contentContainerStyle={{flexGrow: 1}}
+        keyboardShouldPersistTaps='handled'
+        >
+          {/*View Tasks Section*/}
+          <View style={styles.tasksWrapper}>
+            <Text style={styles.sectionHeader}>Today's Tasks</Text>
+            {
+              this.state.taskItems.map((item, i) => {
+                return (
+                  <TouchableOpacity key={i}  onPress={() => this._handleTaskCompleted(i)}>
+                    <Task key={i.toString()} text={item.task}/>
+                  </TouchableOpacity>
+
+              )})
+            }
+
+          </View>
+        </ScrollView>
+        {/*Write Tasks Section*/}
+        <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+          style={styles.writeTaskWrapper}
+          >
+          <TextInput
+            style={styles.taskTextInput}
+            placeholder={'Write a task'}
+            onChangeText={text => this._handleTextChange(text)}
+            />
+          <TouchableOpacity onPress={() => this._handleAddTask()}>
+            <View style={styles.addTaskWrapper}>
+              <Text style={styles.addText}>+</Text>
+            </View>
+          </TouchableOpacity>
+        </KeyboardAvoidingView>
+
         <FlatList
               data={this.state.tempDoc}
               renderItem={({item}) =>
-                <View style={{flexDirection: 'column', padding: 10, alignItems: 'stretch'}}>
+                <View style={{flexDirection: 'row', padding: 10, alignItems: 'stretch'}}>
                   <TouchableHighlight>
-                    <View>
-                      <Text>description:{item.description}</Text>
-                      <Text>discipline: {item.discipline}</Text>
+                    <View style={{ backgroundColor: 'beige' }}>
+                      <Text>description:{item.task}</Text>
                     </View>
                   </TouchableHighlight>
                 </View>
