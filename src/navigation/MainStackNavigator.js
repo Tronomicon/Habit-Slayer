@@ -6,6 +6,8 @@ const Stack = createStackNavigator()
 
 import Home from '../screens/Home.js'
 import Todo from '../screens/Todo.js'
+import CompletedTasks from '../screens/CompletedTasks.js'
+import RoadMap from '../screens/RoadMap.js'
 import CharacterPreview from '../screens/CharacterPreview.js'
 
 function MainStackNavigator() {
@@ -29,7 +31,7 @@ function MainStackNavigator() {
         <Stack.Screen
           name='Home'
           component={Home}
-          options={{ title: 'Habit Slayer' }}
+          options={{ title: '(We still dont have a name)' }}
         />
 
         <Stack.Screen
@@ -45,7 +47,20 @@ function MainStackNavigator() {
         component={CharacterPreview}
         options={{title: 'Habit Slayer'}}
         />
+      
+      <Stack.Screen
+        name='CompletedTasks'
+        component={CompletedTasks}
+        options={{title: 'Completed Tasks'}}
+        />
+
+      <Stack.Screen
+        name='RoadMap'
+        component={RoadMap}
+        options={{title: 'Habit Slayer'}}
+        />
       </Stack.Navigator>
+
     </NavigationContainer>
   )
 }
