@@ -9,6 +9,7 @@ import Todo from '../screens/Todo.js'
 import CompletedTasks from '../screens/CompletedTasks.js'
 import RoadMap from '../screens/RoadMap.js'
 import CharacterPreview from '../screens/CharacterPreview.js'
+import TaskManagement from '../screens/TaskManagement.js'
 
 function MainStackNavigator() {
   return (
@@ -31,12 +32,12 @@ function MainStackNavigator() {
         <Stack.Screen
           name='Home'
           component={Home}
-          options={{ title: '(We still dont have a name)' }}
+          options={{ title: 'Habit Slayer' }}
         />
 
         <Stack.Screen
           name='Todo'
-          component={Todo}
+          component={TaskManagement}
           options = {({ route }) => ({
             title: route.params.item.name
           })}
@@ -47,7 +48,7 @@ function MainStackNavigator() {
         component={CharacterPreview}
         options={{title: 'Habit Slayer'}}
         />
-      
+
       <Stack.Screen
         name='CompletedTasks'
         component={CompletedTasks}
