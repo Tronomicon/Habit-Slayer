@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { View, Text, TextInput, Button, TouchableHighlight, FlatList, KeyboardAvoidingView, TouchableOpacity, Keyboard, ScrollView} from 'react-native';
+import { View, Text, TextInput, Button, TouchableHighlight, FlatList, KeyboardAvoidingView, TouchableOpacity, Keyboard, ScrollView, ImageBackground, Image} from 'react-native';
 
 import {v4 as uuidv4} from 'uuid';
 import {styles} from '../styles/taskManagementStyles.js';
@@ -8,7 +8,6 @@ import Task from '../components/Tasks.js';
 
 import {firebase} from '../firebase/config';
 import 'firebase/firestore';
-
 
 class TaskManagement extends Component {
 
@@ -64,14 +63,13 @@ class TaskManagement extends Component {
   }
 
   //when button is pressed, adds the new task to the list of taskItems and saves to firebase
-  async _handleAddTask() {
-    const docs = await
-    Keyboard.dismiss();
+   _handleAddTask() {
     this._saveToFirebase()
     let {taskItems} = this.state
     let {task} = this.state
     taskItems.push({task})
     this.setState({taskItems: taskItems})
+    Keyboard.dismiss();
   }
 
   //when task item is touched: copies taskItems, remove item in copy at that index, updates taskItems
@@ -116,10 +114,12 @@ class TaskManagement extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <ImageBackground source={require('../images/Adventure_Wallpaper.jpg')} style={styles.container}>
+
         <View style={styles.headerWrapper}>
+          <Image source={require('../images/sword_icon.png')} style={{width:30, height:30}}/>
           <Text style={styles.headerText}>
-            Welcome to Habit Slayer
+            Habit Slayer
           </Text>
         </View>
 
@@ -174,7 +174,7 @@ class TaskManagement extends Component {
               refreshing={this.state.refreshing}
           />
 
-      </View>
+      </ImageBackground>
     )
   }
 }

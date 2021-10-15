@@ -2,22 +2,28 @@ import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#E8EAED'
+    flex: 1
   },
   headerWrapper: {
-    flex: .15,
-    marginTop:40
+    flex: .25,
+    marginTop:30,
+    flexDirection: 'row',
+    marginHorizontal: 15 ,
+    justifyContent: 'center',
+  },
+  headerText: {
+    fontSize: 20,
+    textAlign: 'center',
+    fontWeight: 'bold'
   },
   tasksWrapper: {
     flex: 1
   },
   writeTaskWrapper: {
-
     width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-around',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   taskTextInput: {
     paddingVertical: 15,
@@ -36,10 +42,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  headerText: {
-    fontSize: 20,
-    textAlign: 'center'
-  },
   sectionHeader: {
     fontSize: 20,
     fontWeight: 'bold'
@@ -55,6 +57,10 @@ const styles = StyleSheet.create({
   },
   task: {
     backgroundColor: "#fff"
+  },
+  image: {
+    flex: 1,
+    justifyContent: "center"
   }
 })
 
