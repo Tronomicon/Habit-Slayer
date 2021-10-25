@@ -4,10 +4,10 @@ import { StyleSheet,Text, View, TouchableOpacity, ImageBackground } from 'react-
 function Home(props) {
     
     const {navigation} = props
-    const image = { uri: "https://i.pinimg.com/originals/a1/9a/1d/a19a1df22a78826d35961812f1ccfe11.png?q=60"}
+    const image = { uri: "https://cdn.discordapp.com/attachments/548321795170631690/902201090748080208/background1.png"}
 
     const character = {
-        name: 'Luke Skywalker',
+        name: 'Welcome Luke Skywalker',
         home: 'Tatooine',
         species: 'human'
     }
@@ -73,10 +73,10 @@ const styles = StyleSheet.create({
     },
     text: {
         color: 'white',
-        fontSize: 35,
+        fontSize: 40,
         fontWeight: 'bold',
         textShadowColor:'black',
-        textShadowOffset:{width: 5, height: 5},
+        textShadowOffset:{width: 3, height: 3},
         textShadowRadius:1,
     },
     quoteText: {
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
         fontSize: 25,
         fontWeight: 'bold',
         textShadowColor:'black',
-        textShadowOffset:{width: 5, height: 5},
+        textShadowOffset:{width: 3, height: 3},
         textShadowRadius:1,
     },
     buttonContainer: {
@@ -131,10 +131,14 @@ const styles = StyleSheet.create({
     },
     taskText: {
         textAlign: 'left',
-        fontSize: 21,
-        color: 'red',
+        fontSize: 25,
+        color: 'white',
         fontWeight: 'bold',
-        padding: 30
+        padding: 30,
+        fontWeight: 'bold',
+        textShadowColor:'black',
+        textShadowOffset:{width: 3, height: 3},
+        textShadowRadius:.5,
         
     },
     textContainer: {

@@ -17,15 +17,11 @@ function Settings(props) {
 
     <View style={styles.container}>
 
-      <View style={styles.containerCharacter}>
-
-    
-
-       </View>
-
+     
+    <Text style={styles.textHeader}>View Character</Text>
       <TouchableOpacity
-        style={styles.buttonContainer}
-        onPress={() => navigation.popToTop()}>
+        style={styles.containerCharacter}
+        onPress={() => navigation.navigate('CharacterPreview2')}>
         
       </TouchableOpacity>
     </View>

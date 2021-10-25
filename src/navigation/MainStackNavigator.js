@@ -10,6 +10,7 @@ import CompletedTasks from '../screens/CompletedTasks.js'
 import RoadMap from '../screens/RoadMap.js'
 import CharacterPreview from '../screens/CharacterPreview.js'
 import TaskManagement from '../screens/TaskManagement.js'
+import CharacterPreview2 from '../screens/Character-Custom'
 
 function MainStackNavigator() {
   return (
@@ -32,7 +33,7 @@ function MainStackNavigator() {
         <Stack.Screen
           name='Home'
           component={Home}
-          options={{ title: 'Habit Slayer' }}
+          options={{ title: 'Habit' }}
         />
 
         <Stack.Screen
@@ -46,7 +47,13 @@ function MainStackNavigator() {
         <Stack.Screen
         name='CharacterPreview'
         component={CharacterPreview}
-        options={{title: 'Habit Slayer'}}
+        options={{title: 'Habit '}}
+        />
+
+        <Stack.Screen
+        name='CharacterPreview2'
+        component={CharacterPreview2}
+        options={{title: 'Habit '}}
         />
 
       <Stack.Screen
@@ -58,7 +65,7 @@ function MainStackNavigator() {
       <Stack.Screen
         name='RoadMap'
         component={RoadMap}
-        options={{title: 'Habit Slayer'}}
+        options={{title: 'Habit '}}
         />
       </Stack.Navigator>
 
