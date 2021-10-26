@@ -44,7 +44,7 @@ function Home(props) {
         <TouchableOpacity
             style={styles.buttonContainer2}
             onPress={() => navigation.navigate('RoadMap')}>
-        <Text style={styles.text}>RoadMap</Text>
+        <Text style={styles.text}>Completed Goals</Text>
         </TouchableOpacity>
 
         <View style={styles.buttonContainer3}>
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     },
     text: {
         color: 'white',
-        fontSize: 40,
+        fontSize: 37,
         fontWeight: 'bold',
         textShadowColor:'black',
         textShadowOffset:{width: 3, height: 3},
