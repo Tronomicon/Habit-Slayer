@@ -33,7 +33,7 @@ export default function App() {
       
       
       <RNMonthly
-     numberOfDays={31}
+     numberOfDays={30}
      activeBackgroundColor="darkblue"
      inactiveBackgroundColor="lightskyblue"
      activeDays={[1, 3, 5, 6, 7, 8, 10, 11, 12 ,13, 14, 15, 16, 17, 18 , 20, 21, 22 ,23 ,24 ,25 ]}
