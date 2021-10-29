@@ -2,44 +2,42 @@ import React from 'react'
 import { StyleSheet, View, Text, TouchableOpacity, ImageBackground,Image } from 'react-native'
 import { startClock } from 'react-native-reanimated'
 import Slideshow from 'react-native-image-slider-show';
+import * as Progress from 'react-native-progress';
 
 function Settings(props) {
 
     const { navigation } = props
-    const image = { uri: "https://i.pinimg.com/originals/3a/d1/71/3ad17165cde9bd1b7eae8c7480b93dca.gif"}
-
+    const image = { uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYsGnAkydlqwyokr3hA6IXmezsCHyEuFtTx4lXmFVRgJNlUhAP6SqWnyJ7DcR9xJfp_us&usqp=CAU"}
+    const image2 = { uri: "https://blenderartists.org/uploads/default/original/4X/5/d/b/5db923e0e6dd4c057e281775bdf4c3d1a6676787.png"}
   return (
     <ImageBackground 
     source={image}
     style={styles.backgroundImage}>
 
-      <Text style={styles.textHeader}>Character Name</Text>
+      <Text style={styles.textHeader}>Michael Osman</Text>
 
     <View style={styles.container}>
-
-      <View style={styles.containerCharacter}>
-
+    <Text style={styles.textHeader2}>View Character</Text>
     
-
-       </View>
-
       <TouchableOpacity
-        style={styles.buttonContainer}
-        onPress={() => navigation.popToTop()}>
-        
+        style={styles.containerCharacter}
+        onPress={() => navigation.navigate('CharacterPreview2')}>
+         <Image
+          source={image2}
+          style={styles.image}
+          />
       </TouchableOpacity>
     </View>
-
+    
     <View style={styles.container2}>
    
-
+  <Text style={styles.textHeader2}>Currnet Level: 7</Text>
     <View style={styles.container3}>
-      <Text style={styles.text}>DISCIPLINE</Text>
+    
+      <Progress.Bar progress={0.3} width={400} height={50} />
     </View>
 
-    <View style={styles.container3}>
-      <Text style={styles.text}>EXP tracker</Text>
-    </View>
+   
 
      </View>
 
@@ -55,14 +53,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'transparent',
     margin:10,
-    borderRadius: 20,
-    borderColor: 'cyan',
-    borderWidth: 5,
+    
     padding: 50,
   },
   textHeader: {
     color: 'white',
-    fontSize: 36,
+    fontSize: 55,
+    fontWeight: 'bold',
+    textShadowColor:'black',
+    textShadowOffset:{width: 5, height: 5},
+    textShadowRadius:1,
+  },
+  textHeader2: {
+    color: 'white',
+    fontSize: 35,
     fontWeight: 'bold',
     textShadowColor:'black',
     textShadowOffset:{width: 5, height: 5},
@@ -98,10 +102,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'transparent',
     margin:10,
-    borderRadius: 20,
-    borderColor: 'cyan',
-    borderWidth: 5,
-    flexDirection: 'row'
+   
+    flexDirection: 'column'
   },
   container3: {
     height:150,
@@ -110,9 +112,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'transparent',
     margin:10,
-    borderRadius: 20,
-    borderColor: 'cyan',
-    borderWidth: 5,
+  
     flexDirection: 'row'
   },
   containerCharacter: {
@@ -122,11 +122,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'transparent',
     margin:10,
-    borderRadius: 20,
-    borderColor: 'cyan',
-    borderWidth: 5,
     flexDirection: 'row'
   },
+  image:{
+    width:500,
+    height:500
+    },
 })
 
 export default Settings

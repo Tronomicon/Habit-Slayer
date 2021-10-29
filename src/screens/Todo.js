@@ -14,9 +14,9 @@ function Detail(props) {
         <Text style={styles.text}>Todo List</Text>
         <View style={styles.card}>
         
-        <Text style={styles.cardText}>This is item 1 </Text>
-        <Text style={styles.cardText}>This is item 2 </Text>
-        <Text style={styles.cardText}>This is item 3</Text>
+        <Text style={styles.text}>This is item 1 </Text>
+        <Text style={styles.text}>This is item 2 </Text>
+        <Text style={styles.text}>This is item 3</Text>
         
         <TouchableOpacity
             style={styles.buttonContainer}
