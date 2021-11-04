@@ -14,19 +14,21 @@ function Settings(props) {
     source={image}
     style={styles.backgroundImage}>
 
-      <Text style={styles.textHeader}>Michael Osman</Text>
+      
 
     <View style={styles.container}>
-    <Text style={styles.textHeader2}>View Character</Text>
-    
-      <TouchableOpacity
-        style={styles.containerCharacter}
-        onPress={() => navigation.navigate('CharacterPreview2')}>
-         <Image
-          source={image2}
-          style={styles.image}
-          />
-      </TouchableOpacity>
+    <Slideshow 
+      dataSource={[
+        { url:'https://cdn.discordapp.com/attachments/548321795170631690/905208233008971847/IMG_0056.PNG' },
+        ]}/>
+      <Slideshow 
+      dataSource={[
+        { url:'https://cdn.discordapp.com/attachments/548321795170631690/905208231108952114/IMG_0051.PNG' },
+          ]}/>
+      <Slideshow 
+      dataSource={[
+        { url:'https://cdn.discordapp.com/attachments/548321795170631690/905208229041168414/IMG_0065.PNG' },
+       ]}/>
     </View>
     
     <View style={styles.container2}>
@@ -47,14 +49,12 @@ function Settings(props) {
 
 const styles = StyleSheet.create({
   container: {
-    height:500,
-    width: 400,
-    justifyContent: 'space-around',
+    flex:1,
+    
     alignItems: 'center',
     backgroundColor: 'transparent',
     margin:10,
     
-    padding: 50,
   },
   textHeader: {
     color: 'white',
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   container2: {
-    height:250,
+    height:150,
     width: 400,
     justifyContent: 'space-around',
     alignItems: 'center',
