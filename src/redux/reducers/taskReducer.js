@@ -3,10 +3,11 @@ const taskReducer = (state = [], action) => {
   switch (action.type) {
       case 'ADD_TODO':
           //return a new array that has the origial todo's and then adding a new todo with updated text
+          //console.log(action.text)
           return [
               ...state, {
-                  id: action.id,
-                  text: action.text,
+                  id: action.content.task_id,
+                  text: action.content.task_text,
                   completed: false
               }
           ]

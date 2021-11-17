@@ -23,6 +23,7 @@ const TasksList = ({ todos, toggleTodo }) => (
       <View style={styles.tasksWrapper}>
         <Text style={styles.sectionHeader}>Today's Tasks</Text>
         {
+          todos == undefined ? console.log("Todos is undefined.") :
           todos.map((todo) => {
             return (
               <TouchableOpacity key={todo.id}  onPress={() =>  toggleTodo(todo.id)}>
@@ -31,6 +32,7 @@ const TasksList = ({ todos, toggleTodo }) => (
 
           )})
         }
+
 
       </View>
     </ScrollView>
