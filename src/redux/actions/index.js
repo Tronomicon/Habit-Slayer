@@ -1,4 +1,4 @@
-import { ADD_TODO, TOGGLE_TODO } from './actionTypes'
+import { ADD_TODO, TOGGLE_TODO, REMOVE_TASK } from './actionTypes'
 
 // //without Thunk just returning an action object
 // export const addTodo = (text, id) => ({
@@ -17,13 +17,14 @@ export const addTodo = (content) => {
     firestore
       .collection("Tasks")
       .add({
-        ...content
+        ...content,
+        date_created: new Date()
       })
       .then( () => {
         //resuming dispatch
         dispatch({
           type: ADD_TODO,
-          content
+          content,
         });
       })
   }
@@ -33,3 +34,18 @@ export const toggleTodo = (id) => ({
     type: TOGGLE_TODO,
     id
 })
+
+export const removeTask = (id) => {
+  return (dispatch, getState, {getFirebase}) => {
+    const firestore = getFirebase().firestore();
+    firestore
+      .collection("Tasks")
+      .doc(id)
+      .delete()
+      .then( () => {
+        dispatch({
+          type: REMOVE_TASK,
+        });
+      })
+  }
+}

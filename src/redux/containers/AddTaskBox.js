@@ -39,36 +39,21 @@ class AddTaskBox extends Component {
           {task_id: id}, () => this._addNewTask()
         )
 
-
         //WITHOUT THUNK, adding new task with text from the TextInput to the store
         //this class can call this.props.dispatch() b/c of connect() from redux has connected the class to the store
         //dispatching an action
         //this.props.dispatch(addTodo(this.state.task_text, id))
 
-
     }
 
     _addNewTask() {
       //console.log("text:", this.state.task_text);
-
       //dispatches the state containing the todo's content to the store
       this.props.addTodo(this.state)
 
-      console.log("List of todos:", this.props.todos);
+      //console.log("List of todos:", this.props.todos);
       this.setState({ task_text: '' })
 
-    }
-
-    _saveToFirebase() {
-
-      // const dbh = firebase.firestore();
-      // dbh.collection("Tasks")
-      // .doc(this.state.task_id)
-      // .set({
-      //   text: this.state.task_text,
-      //   id: this.state.task_id,
-      // });
-      // console.log("Saved to firebase!")
     }
 
     render() {
@@ -93,7 +78,7 @@ class AddTaskBox extends Component {
 }
 
 const mapStateToProps = state => ({
-    todos: state.todos
+    todos: state.tasks
 })
 
 const mapDispatchToProps = dispatch => ({

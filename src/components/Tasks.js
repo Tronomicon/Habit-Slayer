@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import {styles} from '../styles/taskStyles.js';
+import moment from "moment";
 
 const Task = (props) => {
 
@@ -10,6 +11,7 @@ const Task = (props) => {
         <View style={styles.square}></View>
         <Text >{props.text}</Text>
       </View>
+      <Text >{moment(props.date.toDate()).calendar()}</Text>
       <View style={styles.circular}></View>
     </View>
   )

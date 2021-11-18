@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux'
-import todos from './taskReducer.js'
+import taskReducer from './taskReducer.js'
 import {firebaseReducer} from 'react-redux-firebase'
 import {firestoreReducer} from 'redux-firestore'
 
 export default combineReducers({
-    todos,
+    tasks: taskReducer,
     firebase: firebaseReducer,
     firestore: firestoreReducer
 })

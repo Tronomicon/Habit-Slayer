@@ -6,19 +6,23 @@ const taskReducer = (state = [], action) => {
           //console.log(action.text)
           return [
               ...state, {
-                  id: action.content.task_id,
-                  text: action.content.task_text,
+                  task_id: action.content.task_id,
+                  task_text: action.content.task_text,
                   completed: false
               }
           ]
       case 'TOGGLE_TODO':
           //getting each todo
-          return state.map(todo =>
+          return state.map(task =>
               //if the id of the todo matches the action...
-              (todo.id === action.id)
+              (task.id === action.task_id)
                     //pass in that todo and update it's completed value to its opposite
-                  ? { ...todo, completed: !todo.completed } :
-                  todo)
+                  ? { ...task, completed: !task.completed } :
+                  task)
+      case 'REMOVE_TASK':
+        console.log("Task Removed")
+        return state;
+
       default:
           return state
   }
