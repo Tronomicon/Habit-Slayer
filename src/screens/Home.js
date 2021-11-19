@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet,Text, View, TouchableOpacity, ImageBackground } from 'react-native';
 
 function Home(props) {
-    
+
     const {navigation} = props
     const image = { uri: "https://cdn.discordapp.com/attachments/548321795170631690/902201090748080208/background1.png"}
 
@@ -13,16 +13,16 @@ function Home(props) {
     }
 
     return (
-        <ImageBackground 
+        <ImageBackground
         source={image}
          style={styles.backgroundImage}>
 
     <View style={styles.container}>
         <Text style={styles.text}>Home page</Text>
-        
+
         <TouchableOpacity
             style={styles.buttonContainer}
-            onPress={() => navigation.navigate('Todo', { item: character})}>
+            onPress={() => navigation.navigate('TaskHub', { item: character})}>
 
          <View style={styles.containerSmaller}>
             <Text style={styles.text}> Todo List</Text>
@@ -34,7 +34,7 @@ function Home(props) {
             </View>
          </View>
             </TouchableOpacity>
-           
+
         <TouchableOpacity
             style={styles.buttonContainer2}
             onPress={() => navigation.navigate('CharacterPreview')}>
@@ -50,7 +50,7 @@ function Home(props) {
         <View style={styles.buttonContainer3}>
         <Text style={styles.quoteText}>This is a place holder for quotes</Text>
         </View>
-    </View>    
+    </View>
     </ImageBackground>
     )
 }
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'flex-start',
         alignItems: 'center',
-        
+
     },
     containerSmaller: {
         height: 50,
@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
         borderColor: 'cyan',
         borderWidth: 5,
         borderRadius: 20,
-        
+
     },
     buttonText: {
         textAlign: 'center',
@@ -139,12 +139,12 @@ const styles = StyleSheet.create({
         textShadowColor:'black',
         textShadowOffset:{width: 3, height: 3},
         textShadowRadius:.5,
-        
+
     },
     textContainer: {
         justifyContent: 'space-between',
         width:370
     }
-})  
+})
 
 export default Home
