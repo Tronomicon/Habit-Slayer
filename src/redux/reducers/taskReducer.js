@@ -6,7 +6,6 @@ const taskReducer = (state = [], action) => {
           //console.log(action.text)
           return [
               ...state, {
-                  task_id: action.content.task_id,
                   task_text: action.content.task_text
               }
           ]
