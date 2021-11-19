@@ -7,8 +7,7 @@ const taskReducer = (state = [], action) => {
           return [
               ...state, {
                   task_id: action.content.task_id,
-                  task_text: action.content.task_text,
-                  completed: false
+                  task_text: action.content.task_text
               }
           ]
       case 'TOGGLE_TODO':
@@ -22,7 +21,12 @@ const taskReducer = (state = [], action) => {
       case 'REMOVE_TASK':
         console.log("Task Removed")
         return state;
-
+      case 'TOGGLE_ISCOMPLETED':
+        console.log("Task Toggled")
+        return state;
+      case 'UPDATE_TASK_EXP':
+        console.log('Exp updated')
+        return state;
       default:
           return state
   }

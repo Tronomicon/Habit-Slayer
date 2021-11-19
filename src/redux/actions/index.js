@@ -1,4 +1,4 @@
-import { ADD_TODO, TOGGLE_TODO, REMOVE_TASK } from './actionTypes'
+import { ADD_TODO, REMOVE_TASK, TOGGLE_ISCOMPLETED, UPDATE_TASK_EXP} from './actionTypes'
 
 // //without Thunk just returning an action object
 // export const addTodo = (text, id) => ({
@@ -18,7 +18,9 @@ export const addTodo = (content) => {
       .collection("Tasks")
       .add({
         ...content,
-        date_created: new Date()
+        date_created: new Date(),
+        isCompleted: false,
+        task_experience: 2
       })
       .then( () => {
         //resuming dispatch
@@ -30,10 +32,22 @@ export const addTodo = (content) => {
   }
 }
 
-export const toggleTodo = (id) => ({
-    type: TOGGLE_TODO,
-    id
-})
+export const toggleIsCompleted = (task) => {
+  return (dispatch, getState, { getFirebase }) => {
+    const firestore = getFirebase().firestore();
+    firestore
+      .collection("Tasks")
+      .doc(task.id)
+      .update({
+        isCompleted: !task.isCompleted
+      })
+      .then(() => {
+        dispatch({
+          type: TOGGLE_ISCOMPLETED
+        });
+      })
+  }
+}
 
 export const removeTask = (id) => {
   return (dispatch, getState, {getFirebase}) => {
@@ -45,6 +59,23 @@ export const removeTask = (id) => {
       .then( () => {
         dispatch({
           type: REMOVE_TASK,
+        });
+      })
+  }
+}
+
+export const updateTaskExp = (task, newExp) => {
+  return (dispatch, getState, { getFirebase }) => {
+    const firestore = getFirebase().firestore();
+    firestore
+      .collection("Tasks")
+      .doc(task.id)
+      .update({
+        task_experience: newExp
+      })
+      .then(() => {
+        dispatch({
+          type: UPDATE_TASK_EXP
         });
       })
   }

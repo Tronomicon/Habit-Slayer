@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import {styles} from '../styles/taskStyles.js';
 import moment from "moment";
+import Checkmark from './Checkmark.js'
 
 const Task = (props) => {
 
@@ -12,7 +13,7 @@ const Task = (props) => {
         <Text >{props.text}</Text>
       </View>
       <Text >{moment(props.date.toDate()).calendar()}</Text>
-      <View style={styles.circular}></View>
+      <Checkmark isCompleted={props.isCompleted}/>
     </View>
   )
 }

@@ -5,7 +5,7 @@ import TasksList from '../../components/TasksList.js';
 import {removeTask} from '../actions'
 import {toggleTodo} from '../actions'
 
-//contains the variables/states from redux we want to have access too in our applicaton (TasksList)
+//contains the variables/states from redux we want to have access to in our applicaton (TasksList)
 //state is usually just the redux store but b/c firestoreConnect() it also contains data from the Tasks collection on firestore
 const mapStateToProps = state => {
     //console.log(state)

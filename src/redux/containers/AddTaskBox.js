@@ -8,7 +8,6 @@ import {
     KeyboardAvoidingView
 } from "react-native";
 
-import {v4 as uuidv4} from 'uuid';
 import {styles} from '../../styles/taskHubStyles.js';
 import { connect } from 'react-redux';
 import { addTodo } from '../actions';
@@ -19,8 +18,7 @@ import 'firebase/firestore';
 class AddTaskBox extends Component {
 
     state = {
-        task_text: '',
-        task_id: 'Filler ID',
+        task_text: ''
     }
 
     _handleTextChange(changedText) {
@@ -34,26 +32,17 @@ class AddTaskBox extends Component {
     _handleSubmit() {
 
         //updating task id then uses callback to save to firebase after the update happens
-        let id = uuidv4();
-        this.setState(
-          {task_id: id}, () => this._addNewTask()
-        )
+        this.props.addTodo(this.state)
+
+        //to clear the text input text
+        this.textInput.clear()
+
+        this.setState({ task_text: '' })
 
         //WITHOUT THUNK, adding new task with text from the TextInput to the store
         //this class can call this.props.dispatch() b/c of connect() from redux has connected the class to the store
         //dispatching an action
         //this.props.dispatch(addTodo(this.state.task_text, id))
-
-    }
-
-    _addNewTask() {
-      //console.log("text:", this.state.task_text);
-      //dispatches the state containing the todo's content to the store
-      this.props.addTodo(this.state)
-
-      //console.log("List of todos:", this.props.todos);
-      this.setState({ task_text: '' })
-
     }
 
     render() {
@@ -63,8 +52,10 @@ class AddTaskBox extends Component {
               style={styles.writeTaskWrapper}
               >
               <TextInput
+                id='TextInput'
                 style={styles.taskTextInput}
                 placeholder={'Write a task'}
+                ref={input => { this.textInput = input }}
                 onChangeText={(changedText) =>  this._handleTextChange(changedText)}
                 />
               <TouchableOpacity onPress={() => this._handleSubmit()}>
@@ -78,7 +69,7 @@ class AddTaskBox extends Component {
 }
 
 const mapStateToProps = state => ({
-    todos: state.tasks
+    tasks: state.tasks
 })
 
 const mapDispatchToProps = dispatch => ({

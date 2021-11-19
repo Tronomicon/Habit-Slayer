@@ -8,6 +8,7 @@ import {
 } from "react-native";
 
 import {styles} from '../styles/taskHubStyles.js';
+import { useNavigation } from '@react-navigation/native';
 import Task from '../components/Tasks.js';
 
 
@@ -16,12 +17,12 @@ import Task from '../components/Tasks.js';
 //if it is completed, it will show as crossed out
 const TasksList = ({ tasks, toggleTodo, removeTask }) => {
     //console.log("Tasks from TaskList.js", tasks),
-    const handleTaskPressed = (id) => {
+    const navigation = useNavigation();
 
-      //console.log(id)
-      toggleTodo(id);
-      removeTask(id);
-    };
+
+    const handleLongPressed = (task) => {
+      removeTask(task.id);
+    }
 
     return (
       <ScrollView
@@ -35,8 +36,10 @@ const TasksList = ({ tasks, toggleTodo, removeTask }) => {
             tasks == undefined ? console.log("Todos is undefined.") :
             tasks.map((task) => {
               return (
-                <TouchableOpacity key={task.task_id}  onLongPress={() => handleTaskPressed(task.id)}>
-                  <Task key={task.task_id} text={task.task_text} date={task.date_created}/>
+                <TouchableOpacity key={task.id}
+                  onPress={() => navigation.navigate('TaskWorkRoom', {task: task})}
+                  onLongPress={() => handleLongPressed(task)}>
+                  <Task text={task.task_text} date={task.date_created} isCompleted={task.isCompleted}/>
                 </TouchableOpacity>
 
             )})

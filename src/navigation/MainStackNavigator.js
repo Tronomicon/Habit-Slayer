@@ -17,6 +17,7 @@ import RoadMap from '../screens/RoadMap.js'
 import CharacterPreview from '../screens/CharacterPreview.js'
 import TaskManagement from '../screens/TaskManagement.js'
 import TaskHub from '../screens/TaskHub.js'
+import TaskWorkRoom from '../screens/TaskWorkRoom.js'
 import CharacterPreview2 from '../screens/Character-Custom'
 
 
@@ -56,11 +57,15 @@ function MainStackNavigator() {
             />
 
             <Stack.Screen
-              name='Todo'
+              name='TaskHub'
               component={TaskHub}
               options = {({ route }) => ({
                 title: route.params.item.name
               })}
+            />
+            <Stack.Screen
+              name='TaskWorkRoom'
+              component={TaskWorkRoom}
             />
 
             <Stack.Screen
