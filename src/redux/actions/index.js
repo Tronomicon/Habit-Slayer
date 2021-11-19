@@ -1,4 +1,4 @@
-import { ADD_TODO, REMOVE_TASK, TOGGLE_ISCOMPLETED, UPDATE_TASK_EXP} from './actionTypes'
+import { ADD_TODO, REMOVE_TASK, TOGGLE_ISCOMPLETED, UPDATE_TASK_EXP, UPDATE_ACHIEVEMENTS} from './actionTypes'
 
 // //without Thunk just returning an action object
 // export const addTodo = (text, id) => ({
@@ -76,6 +76,25 @@ export const updateTaskExp = (task, newExp) => {
       .then(() => {
         dispatch({
           type: UPDATE_TASK_EXP
+        });
+      })
+  }
+}
+
+export const updateAchievements = (task, achievements, newDatesArray) => {
+  return (dispatch, getState, { getFirebase }) => {
+    const firestore = getFirebase().firestore();
+    firestore
+      .collection("Achievements")
+      .doc('User_1')
+      .update({
+        datesOfCompletedTasks: newDatesArray,
+        numOfCompletedTasks: achievements.numOfCompletedTasks + 1,
+        total_exp: achievements.total_exp + task.task_experience
+      })
+      .then(() => {
+        dispatch({
+          type: UPDATE_ACHIEVEMENTS
         });
       })
   }

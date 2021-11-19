@@ -26,6 +26,8 @@ const firebaseConfig = {
 //if we cannot connect
 if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
+    //to remove firestore warning
+    firebase.firestore().settings({ experimentalForceLongPolling: true });
 }
 
 //was export { firebase };
