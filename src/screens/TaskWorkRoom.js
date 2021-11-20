@@ -25,12 +25,12 @@ const TaskWorkRoom = (props, {toggleIsCompleted, updateTaskExp, updateAchievemen
   const handleTaskCompletion = (task, achievements) => {
 
     //obtaining the date that the task is completed then formating it to just the day then adding it to a new array containing the previous dates
-    const day_th = moment(new Date()).format('Do')
+    const day_th = moment(new Date()).format('MMM Do')
     //19th --> 19 or 8th --> 8
-    const dayOfCompletion = day_th.length == 4 ? day_th.substring(0, 2) : day_th.substring(0, 1)
-    const newDatesArray = [...achievements[0].datesOfCompletedTasks, dayOfCompletion]
+    //const dayOfCompletion = day_th.length == 4 ? day_th.substring(0, 2) : day_th.substring(0, 1)
+    const newDatesArray = [...achievements[0].datesOfCompletedTasks, day_th]
 
-    //console.log(achievements[0].id)
+    console.log(achievements[0])
     //achievements is passed as an array of documents, only one document atm thus achievements[0]
     props.updateAchievements(task, achievements[0], newDatesArray);
     props.toggleIsCompleted(task);
@@ -81,7 +81,7 @@ const TaskWorkRoom = (props, {toggleIsCompleted, updateTaskExp, updateAchievemen
   )
 }
 const mapStateToProps = (state) => {
-    //console.log(state)
+    console.log(state)
     return {
       achievements: state.firestore.ordered.Achievements
     };

@@ -2,9 +2,13 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View, Image,ImageBackground } from 'react-native';
 import RNMonthly from "react-native-monthly";
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { firestoreConnect } from 'react-redux-firebase'
 
-export default function App() {
+const App = ( props ) => {
 
+  //console.log(props.achievements)
   const image = { uri: "https://cdn0.iconfinder.com/data/icons/light-theme/100/ultimate_collection_light_dumbbell-512.png"}
   const background = {uri:'https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/rm283-nunny-228-f.jpg?w=1200&h=1200&dpr=1&fit=clip&crop=default&fm=jpg&q=75&vib=3&con=3&usm=15&cs=srgb&bg=F4F4F3&ixlib=js-2.2.1&s=07450487a021e4ed1452f938be8cad33'}
 
@@ -20,7 +24,7 @@ export default function App() {
           source={image}
           style={styles.image}
           />
-        
+
       </View>
 
     <View style={styles.container35}>
@@ -30,28 +34,40 @@ export default function App() {
     </View>
       </View>
 
-      
-      
+
+
       <RNMonthly
      numberOfDays={30}
      activeBackgroundColor="darkblue"
      inactiveBackgroundColor="lightskyblue"
      activeDays={[1, 3, 5, 6, 7, 8, 10, 11, 12 ,13, 14, 15, 16, 17, 18 , 20, 21, 22 ,23 ,24 ,25 ]}
     />
- 
-      
+
+
       <StatusBar style="auto" />
       </ImageBackground>
     </View>
   );
 }
 
+const mapStateToProps = (state) => {
+    //console.log(state)
+    return {
+      achievements: state.firestore.ordered.Achievements
+    };
+}
+
+export default compose(
+  firestoreConnect(() => [ { collection: 'Achievements' } ]), // sync Tasks collection from Firestore into redux
+  connect(mapStateToProps, null)
+)(App)
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    
+
   },
   container2: {
     height:300,
@@ -61,7 +77,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     margin:10,
     flexDirection: 'row',
-   
+
   },
   container3: {
     height:200,
@@ -70,7 +86,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'transparent',
     margin:10,
-   
+
     flexDirection: 'row'
   },
   container35: {
@@ -94,7 +110,7 @@ const styles = StyleSheet.create({
     textShadowOffset:{width: 1, height: 1},
     textShadowRadius:1,
     padding: 15
-    
+
 },
   text1: {
     color: 'white',
