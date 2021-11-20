@@ -3,43 +3,47 @@ import { StyleSheet, View, Text, TouchableOpacity, ImageBackground,Image } from 
 import { startClock } from 'react-native-reanimated'
 import Slideshow from 'react-native-image-slider-show';
 import * as Progress from 'react-native-progress';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { firestoreConnect } from 'react-redux-firebase'
 
 function Settings(props) {
+    //console.log(props.achievements)
 
     const { navigation } = props
     const image = { uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYsGnAkydlqwyokr3hA6IXmezsCHyEuFtTx4lXmFVRgJNlUhAP6SqWnyJ7DcR9xJfp_us&usqp=CAU"}
     const image2 = { uri: "https://blenderartists.org/uploads/default/original/4X/5/d/b/5db923e0e6dd4c057e281775bdf4c3d1a6676787.png"}
   return (
-    <ImageBackground 
+    <ImageBackground
     source={image}
     style={styles.backgroundImage}>
 
-      
+
 
     <View style={styles.container}>
-    <Slideshow 
+    <Slideshow
       dataSource={[
         { url:'https://cdn.discordapp.com/attachments/548321795170631690/905208233008971847/IMG_0056.PNG' },
         ]}/>
-      <Slideshow 
+      <Slideshow
       dataSource={[
         { url:'https://cdn.discordapp.com/attachments/548321795170631690/905208231108952114/IMG_0051.PNG' },
           ]}/>
-      <Slideshow 
+      <Slideshow
       dataSource={[
         { url:'https://cdn.discordapp.com/attachments/548321795170631690/905208229041168414/IMG_0065.PNG' },
        ]}/>
     </View>
-    
+
     <View style={styles.container2}>
-   
+
   <Text style={styles.textHeader2}>Currnet Level: 7</Text>
     <View style={styles.container3}>
-    
+
       <Progress.Bar progress={0.3} width={400} height={50} />
     </View>
 
-   
+
 
      </View>
 
@@ -47,14 +51,26 @@ function Settings(props) {
   )
 }
 
+const mapStateToProps = (state) => {
+    //console.log(state)
+    return {
+      achievements: state.firestore.ordered.Achievements
+    };
+}
+
+export default compose(
+  firestoreConnect(() => [ { collection: 'Achievements' } ]), // sync Tasks collection from Firestore into redux
+  connect(mapStateToProps, null)
+)(Settings)
+
 const styles = StyleSheet.create({
   container: {
     flex:1,
-    
+
     alignItems: 'center',
     backgroundColor: 'transparent',
     margin:10,
-    
+
   },
   textHeader: {
     color: 'white',
@@ -102,7 +118,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'transparent',
     margin:10,
-   
+
     flexDirection: 'column'
   },
   container3: {
@@ -112,7 +128,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'transparent',
     margin:10,
-  
+
     flexDirection: 'row'
   },
   containerCharacter: {
@@ -129,5 +145,3 @@ const styles = StyleSheet.create({
     height:500
     },
 })
-
-export default Settings
