@@ -10,16 +10,8 @@ function Detail() {
     <ImageBackground
     source={image}
     style={styles.backgroundImage}>
-
-    
-
     <View style={styles.container}>
-
         <Text style={styles.text}>Calandar</Text>
-
-        
-
-        
     </View>    
     </ImageBackground>
     )

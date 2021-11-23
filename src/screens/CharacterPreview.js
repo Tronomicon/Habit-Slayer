@@ -16,12 +16,16 @@ import {
 import { MenuProvider } from 'react-native-popup-menu';
 
 
-function Settings(props) {
-    //console.log(props.achievements)
 
-    const { navigation } = props
+function Settings(props) {
+    console.log(props)
+    //console.log(props.level1)
+
+    //const { navigation } = props
+    
     const image = { uri: "https://cdn.discordapp.com/attachments/548321795170631690/911815781275275315/door.jpg"}
     const image2 = { uri: "https://blenderartists.org/uploads/default/original/4X/5/d/b/5db923e0e6dd4c057e281775bdf4c3d1a6676787.png"}
+    const level = parseInt(props.achievements[0].total_exp) 
   return (
     <ImageBackground
     source={image}
@@ -250,10 +254,10 @@ function Settings(props) {
 
     <View style={styles.container2}>
 
-  <Text style={styles.textHeader2}>Current Level: 2</Text>
+  <Text style={styles.textHeader2}>Current Level: {Math.floor(level/10)} </Text>
     <View style={styles.container3}>
 
-      <Progress.Bar progress={0.3} width={400} height={50} />
+      <Progress.Bar progress={(Math.floor(level%10)/ 10)} width={400} height={50} />
     </View>
 
 
@@ -267,6 +271,9 @@ function Settings(props) {
 const mapStateToProps = (state) => {
     //console.log(state)
     return {
+      
+      level1: state.firestore,
+      level2: state.firestore.ordered,
       achievements: state.firestore.ordered.Achievements
     };
 }
