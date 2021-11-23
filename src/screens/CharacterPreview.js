@@ -28,16 +28,17 @@ function Settings(props) {
     const image2 = { uri: "https://blenderartists.org/uploads/default/original/4X/5/d/b/5db923e0e6dd4c057e281775bdf4c3d1a6676787.png"}
 
     const getLevel = (data) => {
-      const total_exp = (data == undefined) ? console.log("Achievements is loading in.") : data[0].total_exp
+      const total_exp = data[0].total_exp
       const level = parseInt(total_exp)
       const result = Math.floor(level/10)
+      console.log(result)
       return (
         result
       )
     }
 
     const getProgressExp = (data) => {
-      const total_exp = (data == undefined) ? console.log("Achievements is loading in.") : data[0].total_exp
+      const total_exp = data[0].total_exp
       const level = parseInt(total_exp)
       const result = (Math.floor(level%10)/ 10)
       return (
@@ -273,10 +274,9 @@ function Settings(props) {
 
     <View style={styles.container2}>
 
-  <Text style={styles.textHeader2}>Current Level: {getLevel(props.achievements)} </Text>
+  <Text style={styles.textHeader2}>Current Level: { (props.achievements == undefined) ? console.log("Achievements still loading") : getLevel(props.achievements)} </Text>
     <View style={styles.container3}>
-
-      <Progress.Bar progress={getProgressExp(props.achievements)} width={400} height={50} />
+      <Progress.Bar progress={ (props.achievements == undefined) ? console.log("Achievements still loading") : getProgressExp(props.achievements)} width={400} height={50} />
     </View>
 
 
