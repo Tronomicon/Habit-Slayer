@@ -7,7 +7,7 @@ function Home(props) {
     const image = { uri: "https://cdn.discordapp.com/attachments/548321795170631690/902201090748080208/background1.png"}
 
     const character = {
-        name: 'Welcome Luke Skywalker',
+        name: 'Welcome User',
         home: 'Tatooine',
         species: 'human'
     }
@@ -28,9 +28,9 @@ function Home(props) {
             <Text style={styles.text}> Todo List</Text>
 
             <View style={styles.textContainer}>
-            <Text style={styles.taskText}>• This is a holder for task 1</Text>
-            <Text style={styles.taskText}>• This is a holder for task 2</Text>
-            <Text style={styles.taskText}>• This is a holder for task 3</Text>
+            <Text style={styles.taskText}>• Run again</Text>
+            <Text style={styles.taskText}>• School</Text>
+            <Text style={styles.taskText}>• Workout</Text>
             </View>
          </View>
             </TouchableOpacity>
@@ -38,13 +38,13 @@ function Home(props) {
         <TouchableOpacity
             style={styles.buttonContainer2}
             onPress={() => navigation.navigate('CharacterPreview')}>
-        <Text style={styles.text}>Character Preview</Text>
+        <Text style={styles.text}>Experience</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
             style={styles.buttonContainer2}
             onPress={() => navigation.navigate('RoadMap')}>
-        <Text style={styles.text}>Completed Goals</Text>
+        <Text style={styles.text}>Monthly Tracker</Text>
         </TouchableOpacity>
 
         <View style={styles.buttonContainer3}>
