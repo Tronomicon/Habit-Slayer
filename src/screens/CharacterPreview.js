@@ -18,14 +18,33 @@ import { MenuProvider } from 'react-native-popup-menu';
 
 
 function Settings(props) {
-    console.log(props)
+
+    //console.log(props.achievements)
     //console.log(props.level1)
 
     //const { navigation } = props
-    
+
     const image = { uri: "https://cdn.discordapp.com/attachments/548321795170631690/911815781275275315/door.jpg"}
     const image2 = { uri: "https://blenderartists.org/uploads/default/original/4X/5/d/b/5db923e0e6dd4c057e281775bdf4c3d1a6676787.png"}
-    const level = parseInt(props.achievements[0].total_exp) 
+
+    const getLevel = (data) => {
+      const total_exp = (data == undefined) ? console.log("Achievements is loading in.") : data[0].total_exp
+      const level = parseInt(total_exp)
+      const result = Math.floor(level/10)
+      return (
+        result
+      )
+    }
+
+    const getProgressExp = (data) => {
+      const total_exp = (data == undefined) ? console.log("Achievements is loading in.") : data[0].total_exp
+      const level = parseInt(total_exp)
+      const result = (Math.floor(level%10)/ 10)
+      return (
+        result
+      )
+    }
+
   return (
     <ImageBackground
     source={image}
@@ -33,10 +52,10 @@ function Settings(props) {
 
 <View style={styles.container}>
 
-<MenuProvider> 
+<MenuProvider>
   <View style={styles.containerOuter}>
   <Text style={styles.textHeader}>Badges</Text>
-  
+
         <View style={styles.containerInner}>
           <View style={styles.iconContainer}>
             <EmojiHappy color="#37d67a" variant="Broken" size={54} />
@@ -184,7 +203,7 @@ function Settings(props) {
         </View>
 
         <View style={styles.containerInner}>
-          
+
         <View style={styles.iconContainer}>
             <More color="#808080" variant="Broken" size={54} />
             <Menu>
@@ -250,14 +269,14 @@ function Settings(props) {
           </View>
         </View>
   </View>
-  </MenuProvider> 
+  </MenuProvider>
 
     <View style={styles.container2}>
 
-  <Text style={styles.textHeader2}>Current Level: {Math.floor(level/10)} </Text>
+  <Text style={styles.textHeader2}>Current Level: {getLevel(props.achievements)} </Text>
     <View style={styles.container3}>
 
-      <Progress.Bar progress={(Math.floor(level%10)/ 10)} width={400} height={50} />
+      <Progress.Bar progress={getProgressExp(props.achievements)} width={400} height={50} />
     </View>
 
 
@@ -271,7 +290,7 @@ function Settings(props) {
 const mapStateToProps = (state) => {
     //console.log(state)
     return {
-      
+
       level1: state.firestore,
       level2: state.firestore.ordered,
       achievements: state.firestore.ordered.Achievements
@@ -339,7 +358,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'transparent',
     margin:10,
-    
+
     flexDirection: 'column'
   },
   container3: {
@@ -349,7 +368,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'transparent',
     margin:10,
-    
+
     flexDirection: 'row'
   },
   containerCharacter: {
@@ -371,7 +390,7 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
       paddingTop: 280,
-     
+
     },
     containerInner: {
       backgroundColor: '#D8D8D8',
@@ -388,7 +407,7 @@ const styles = StyleSheet.create({
       padding: 8,
       flexDirection: 'column',
       alignItems: 'center',
-      
+
     },
     textHeader1: {
       color: 'white',
@@ -406,6 +425,6 @@ const styles = StyleSheet.create({
       textShadowColor:'black',
       textShadowOffset:{width: 2, height: 2},
       textShadowRadius:1,
-      
+
     },
 })

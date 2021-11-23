@@ -81,7 +81,7 @@ const TaskWorkRoom = (props, {toggleIsCompleted, updateTaskExp, updateAchievemen
   )
 }
 const mapStateToProps = (state) => {
-    console.log(state)
+    //console.log(state)
     return {
       achievements: state.firestore.ordered.Achievements
     };
