@@ -12,14 +12,12 @@ class TaskHub extends Component {
             <ImageBackground source={require('../images/Adventure_Wallpaper.jpg')} style={styles.container}>
                 <View style={styles.headerWrapper}>
                     <Image source={require('../images/sword_icon.png')} style={{width:30, height:30}}/>
-                    <Text style={styles.headerText}>Habit Slayer</Text>
+                    <Text style={styles.headerText}>Task Hub</Text>
                 </View>
                 <AddTaskBox/>
                 <View>
                     <DisplayTaskBox/>
                 </View>
-
-
             </ImageBackground>
 
         );

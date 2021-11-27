@@ -31,7 +31,7 @@ const TasksList = ({ tasks, toggleTodo, removeTask }) => {
       >
         {/*View Tasks Section*/}
         <View style={styles.tasksWrapper}>
-          <Text style={styles.sectionHeader}>Today's Tasks</Text>
+          <Text style={styles.taskHeader}>Today's Tasks</Text>
           {
             tasks == undefined ? console.log("Todos is undefined.") :
             tasks.map((task) => {

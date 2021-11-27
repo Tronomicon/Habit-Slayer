@@ -12,9 +12,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   headerText: {
-    fontSize: 20,
+    fontSize: 30,
     textAlign: 'center',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    color: 'white',
+    textShadowColor:'black',
+    textShadowOffset:{width: 3, height: 3},
+    textShadowRadius:1,
+  },
+  taskHeader: {
+    color: 'white',
+    fontSize: 20,
+    fontWeight: 'bold',
   },
   writeTaskWrapper: {
     width: '100%',

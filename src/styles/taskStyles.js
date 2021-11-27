@@ -5,13 +5,15 @@ const styles = StyleSheet.create({
     fontSize: 20
   },
   item: {
-    backgroundColor: '#FFF',
+    backgroundColor: 'white',
     padding: 15,
     borderRadius: 10,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginBottom: 20,
+    marginBottom: 15,
+    borderWidth: 3,
+    borderColor: "#255C99"
   },
   itemLeft: {
     flexDirection: 'row',

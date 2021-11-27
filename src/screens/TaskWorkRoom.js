@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, ImageBackground, TouchableOpacity } from "react-native";
+import DifficultyDisplay from '../components/DifficultyDisplay.js'
 import {styles} from '../styles/taskWorkRoomStyles.js';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
@@ -17,11 +18,13 @@ const TaskWorkRoom = (props, {toggleIsCompleted, updateTaskExp, updateAchievemen
 
   const navigation = useNavigation();
 
-  const handleDifficultyChange = (task, newExp) => {
-    //console.log("props:", props)
-    props.updateTaskExp(task, newExp);
-  }
+  const [currentExp, setCurrentExp] = useState(props.route.params.task.task_experience)
 
+  const handleDifficultyChange = (task, newExp) => {
+
+    props.updateTaskExp(task, newExp);
+    setCurrentExp(newExp)
+  }
   const handleTaskCompletion = (task, achievements) => {
 
     //obtaining the date that the task is completed then formating it to just the day then adding it to a new array containing the previous dates
@@ -30,7 +33,6 @@ const TaskWorkRoom = (props, {toggleIsCompleted, updateTaskExp, updateAchievemen
     //const dayOfCompletion = day_th.length == 4 ? day_th.substring(0, 2) : day_th.substring(0, 1)
     const newDatesArray = [...achievements[0].datesOfCompletedTasks, day_th]
 
-    console.log(achievements[0])
     //achievements is passed as an array of documents, only one document atm thus achievements[0]
     props.updateAchievements(task, achievements[0], newDatesArray);
     props.toggleIsCompleted(task);
@@ -42,37 +44,40 @@ const TaskWorkRoom = (props, {toggleIsCompleted, updateTaskExp, updateAchievemen
   return (
     <ImageBackground source={require('../images/Adventure_Wallpaper.jpg')} style={styles.container}>
        <View style = {styles.header}>
-          <Text style = {{fontSize: 30}}> {props.route.params.task.task_text}</Text>
+          <Text style = {styles.taskHeaderText}> {props.route.params.task.task_text}</Text>
+          <DifficultyDisplay currentDifficulty={currentExp}/>
        </View>
-       <Text>Difficulty Level:</Text>
        <View style = {styles.difficultyWrapper}>
+          <View style = {styles.diffTextWrapper}>
+            <Text style = {styles.text}>DIFFICULTY</Text>
+          </View>
           <TouchableOpacity
               style={styles.difficultyButton}
               onPress={() => handleDifficultyChange(props.route.params.task, 2)}>
-                <Icon name="star" size={30} color="#900" />
-                <Text>Easy</Text>
+                <Icon name="star" size={30} color="#F2BB05" />
+                <Text>EASY</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.difficultyButton}
             onPress={() => handleDifficultyChange(props.route.params.task, 5)}>
                 <View style = {{flexDirection: 'row'}}>
-                    <Icon name="star" size={30} color="#900" />
-                    <Icon name="star" size={30} color="#900" />
+                    <Icon name="star" size={30} color="#F2BB05" />
+                    <Icon name="star" size={30} color="#F2BB05" />
                 </View>
-                <Text>Medium</Text>
+                <Text>MEDIUM</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.difficultyButton}
             onPress={() => handleDifficultyChange(props.route.params.task, 10)}>
               <View style = {{flexDirection: 'row'}}>
-                  <Icon name="star" size={30} color="#900" />
-                  <Icon name="star" size={30} color="#900" />
-                  <Icon name="star" size={30} color="#900" />
+                  <Icon name="star" size={30} color="#F2BB05" />
+                  <Icon name="star" size={30} color="#F2BB05" />
+                  <Icon name="star" size={30} color="#F2BB05" />
               </View>
-              <Text>Hard</Text>
+              <Text>HARD</Text>
           </TouchableOpacity>
        </View>
-       <View style = {{ justifyContent: 'center', alignItems: 'center'}}>
+       <View style = {{ justifyContent: 'center', alignItems: 'center', flex: 0.1}}>
            <TouchableOpacity style={styles.completedButton} onPress={() => handleTaskCompletion(props.route.params.task, props.achievements)}>
               <Text style = {{color: 'white'}}>Toggle Completion</Text>
            </TouchableOpacity>
