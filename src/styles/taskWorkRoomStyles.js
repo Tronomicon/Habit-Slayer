@@ -7,32 +7,51 @@ const styles = StyleSheet.create({
       justifyContent: 'flex-start',
   },
   header: {
-      backgroundColor: "darkred",
+      backgroundColor: "#124E78",
       justifyContent: 'center',
       alignItems: 'center',
+      padding: 20,
+      flex: 0.10
   },
   difficultyWrapper: {
-      backgroundColor: "white",
-      flexDirection: 'row',
+      flex: 0.40,
+      flexDirection: 'column',
       justifyContent: 'space-evenly',
-      position: 'relative'
 
   },
   difficultyButton: {
       backgroundColor: "white",
       flexDirection: "column",
-      padding: 25,
       alignItems: 'center',
-      height: 100
+      justifyContent: 'center',
+      padding: 10,
+      borderWidth: 3
   },
   completedButton: {
-      backgroundColor: "darkred",
+      backgroundColor:'green',
       width: 100,
       height: 50,
       borderRadius: 15,
       alignItems: 'center',
       justifyContent: 'center',
-
+  },
+  diffTextWrapper: {
+    backgroundColor: "#255C99",
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 15,
+    borderWidth: 3,
+    marginBottom: 3
+  },
+  text: {
+    color: 'white',
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+  taskHeaderText: {
+    fontSize: 38,
+    fontWeight: 'bold',
+    color: 'white'
   }
 })
 

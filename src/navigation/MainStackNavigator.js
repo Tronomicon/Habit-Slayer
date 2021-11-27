@@ -59,9 +59,6 @@ function MainStackNavigator() {
             <Stack.Screen
               name='TaskHub'
               component={TaskHub}
-              options = {({ route }) => ({
-                title: route.params.item.name
-              })}
             />
             <Stack.Screen
               name='TaskWorkRoom'
