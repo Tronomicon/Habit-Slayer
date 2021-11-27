@@ -10,7 +10,7 @@ import {firebase} from '../firebase/config';
 import 'firebase/firestore';
 
 class TaskManagement extends Component {
-
+  
   constructor(props) {
     super(props);
     this.state = {
@@ -113,6 +113,7 @@ class TaskManagement extends Component {
   }
 
   render() {
+    console.log(this.state.taskItems)
     return (
       <ImageBackground source={require('../images/Adventure_Wallpaper.jpg')} style={styles.container}>
 
@@ -130,16 +131,19 @@ class TaskManagement extends Component {
           {/*View Tasks Section*/}
           <View style={styles.tasksWrapper}>
             <Text style={styles.sectionHeader}>Today's Tasks</Text>
+          
             {
+              
               this.state.taskItems.map((item, i) => {
                 return (
                   <TouchableOpacity key={i}  onPress={() => this._handleTaskCompleted(i)}>
                     <Task key={i.toString()} text={item.task}/>
+                    
                   </TouchableOpacity>
 
               )})
             }
-
+          
           </View>
         </ScrollView>
         {/*Write Tasks Section*/}

@@ -7,18 +7,49 @@ import { compose } from 'redux';
 import { firestoreConnect } from 'react-redux-firebase'
 
 const App = ( props ) => {
-  const level = parseInt(props.achievements)
-  console.log(level)
-  console.log(props.achievements)
+  //const level = parseInt(props.achievements)
+  //console.log(level)
+  const monthNames = ["Jan", "Feb", "Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
+  //console.log(props.achievements.id)
   const image = { uri: "https://cdn0.iconfinder.com/data/icons/light-theme/100/ultimate_collection_light_dumbbell-512.png"}
   const background = {uri:'https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/rm283-nunny-228-f.jpg?w=1200&h=1200&dpr=1&fit=clip&crop=default&fm=jpg&q=75&vib=3&con=3&usm=15&cs=srgb&bg=F4F4F3&ixlib=js-2.2.1&s=07450487a021e4ed1452f938be8cad33'}
-  
-   
+  var month = new Date().getMonth()
+  const getProgressExp = (data) => {
+    const total_exp = data[0].total_exp
+    const level = parseInt(total_exp)
+    const result = (Math.floor(level%10)/ 10)
+    return (
+      result
+    )
+  }
+
+const getDates = (data) => {
+  const totalDays = data[0].datesOfCompletedTasks
+  const results = []
+  console.log(totalDays)
+  //Go through total days
+  for(let i = 1; i < (totalDays.length); i++){
+    const contains = 0
+    //go through results and see if the value exsist already
+    for(let j = 0 ; j < results.length; j++){
+      if(results[j] == totalDays[i].substring(4,6)){
+        console.log(contains)
+        contains = 1
+      }
+    }
+    if(contains == 0){
+      results.push(parseInt(totalDays[i].substring(4,6)))
+    }
+  }
+  console.log(results)
+  return(results)
+}
+
   return (
     
     <View style={styles.container}>
       <ImageBackground source={background} resizeMode="cover" style={styles.background}>
-      <Text style={styles.text1}>November 2021</Text>
+      <Text style={styles.text1}>{monthNames[month]} 2021 Report </Text>
       <View style={styles.container2}>
       <View style={styles.container3}>
       <Image
@@ -27,16 +58,17 @@ const App = ( props ) => {
           />
       </View>
     <View style={styles.container35}>
-    <Text style={styles.text}>Goal: Workout for 1 hour</Text>
-      <Text style={styles.text}>Target Goal: 25</Text>
-      <Text style={styles.text}>Days Achieved: 21 </Text>
+    <Text style={styles.text}>Days Completing a task  {"\n"}{(props.achievements == undefined) ? console.log("Achievements still loading") : getDates(props.achievements).length} </Text>
+      <Text style={styles.text}>Days Target Goal {"\n"} 25</Text>
+      <Text style={styles.text}>Overall Tasks Completed  {"\n"}{(props.achievements == undefined) ? console.log("Achievements still loading") : props.achievements[0].total_exp}  </Text>
+      
     </View>
       </View>
       <RNMonthly
      numberOfDays={30}
      activeBackgroundColor="darkblue"
      inactiveBackgroundColor="lightskyblue"
-     activeDays={[1, 3, 5, 6, 7, 8, 10, 11, 12 ,13, 14, 15, 16, 17, 18 , 20, 21, 22 ,23 ,24 ,25 ]}
+     activeDays={(props.achievements == undefined) ? console.log("Achievements still loading") : getDates(props.achievements)} 
     />
       <StatusBar style="auto" />
       </ImageBackground>
@@ -45,8 +77,9 @@ const App = ( props ) => {
 }
 
 const mapStateToProps = (state) => {
-  //console.log(state)
+ // console.log(state.firestore)
   return {
+    
     level1: state.firestore,
     level2: state.firestore.ordered,
     achievements: state.firestore.ordered.Achievements
