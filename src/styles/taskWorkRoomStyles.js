@@ -11,7 +11,11 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
       alignItems: 'center',
       padding: 20,
-      flex: 0.10
+      flex: 0.10,
+      borderWidth: 3,
+      borderRadius: 15,
+      marginBottom: 30,
+      marginTop: 10
   },
   difficultyWrapper: {
       flex: 0.40,
@@ -25,13 +29,17 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
       padding: 10,
-      borderWidth: 3
+      borderWidth: 3,
+      borderColor: '#255C99',
+      borderRadius: 10
   },
   completedButton: {
       backgroundColor:'green',
       width: 100,
       height: 50,
       borderRadius: 15,
+      borderWidth: 3,
+      borderColor:'#255C99',
       alignItems: 'center',
       justifyContent: 'center',
   },
@@ -41,6 +49,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     padding: 15,
     borderWidth: 3,
+    borderRadius: 10,
     marginBottom: 3
   },
   text: {

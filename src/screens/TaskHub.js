@@ -15,7 +15,7 @@ class TaskHub extends Component {
                     <Text style={styles.headerText}>Task Hub</Text>
                 </View>
                 <AddTaskBox/>
-                <View>
+                <View style={ {flex: 1}}>
                     <DisplayTaskBox/>
                 </View>
             </ImageBackground>

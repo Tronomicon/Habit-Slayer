@@ -17,12 +17,14 @@ const TaskWorkRoom = (props, {toggleIsCompleted, updateTaskExp, updateAchievemen
   //console.log(props)
 
   const navigation = useNavigation();
-
+  //new state variable (currentExp) initalized at the selected task's exp worth
   const [currentExp, setCurrentExp] = useState(props.route.params.task.task_experience)
 
+  //when EASY, MEDIUM, or HARD difficulty buttons is pressed
   const handleDifficultyChange = (task, newExp) => {
-
+    //updates the difficulty/how much exp a task on the firestore via dispatching the async action updateTaskExp
     props.updateTaskExp(task, newExp);
+    //updates currentExp from state with the new difficulty
     setCurrentExp(newExp)
   }
   const handleTaskCompletion = (task, achievements) => {
@@ -37,7 +39,6 @@ const TaskWorkRoom = (props, {toggleIsCompleted, updateTaskExp, updateAchievemen
     props.updateAchievements(task, achievements[0], newDatesArray);
     props.toggleIsCompleted(task);
     navigation.navigate('TaskHub');
-
   }
 
 

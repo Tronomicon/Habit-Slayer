@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
       flex: 1,
   },
   headerWrapper: {
-    flex: .25,
+    flex: 0.15,
     flexDirection: 'row',
     marginHorizontal: 15 ,
     justifyContent: 'center',
@@ -36,8 +36,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     backgroundColor: '#FFF',
     borderRadius: 50,
-    borderColor: '#C0C0C0',
-    borderWidth: 1,
+    borderColor: '#255C99',
+    borderWidth: 3,
     width: 250,
   },
   addTaskWrapper: {
@@ -45,6 +45,8 @@ const styles = StyleSheet.create({
     height: 60,
     backgroundColor: '#FFF',
     borderRadius: 60,
+    borderColor: '#255C99',
+    borderWidth: 3,
     justifyContent: 'center',
     alignItems: 'center',
   }

@@ -12,9 +12,7 @@ import { useNavigation } from '@react-navigation/native';
 import Task from '../components/Tasks.js';
 
 
-//props needed are the todos list and toggleTodo method
-//for each todo, display as a toucable button
-//if it is completed, it will show as crossed out
+
 const TasksList = ({ tasks, toggleTodo, removeTask }) => {
     //console.log("Tasks from TaskList.js", tasks),
     const navigation = useNavigation();
