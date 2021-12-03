@@ -26,22 +26,29 @@ const App = ( props ) => {
 const getDates = (data) => {
   const totalDays = data[0].datesOfCompletedTasks
   const results = []
-  console.log(totalDays)
+  //console.log(totalDays)
   //Go through total days
   for(let i = 1; i < (totalDays.length); i++){
     const contains = 0
-    //go through results and see if the value exsist already
     for(let j = 0 ; j < results.length; j++){
+
+      if(monthNames[month] === totalDays[i].substring(0,3)){
+        console.log("match")
+      
+      //Check that the value doesn't exist already 
       if(results[j] == totalDays[i].substring(4,6)){
-        console.log(contains)
+        console.log("adding a new")
+        console.log(totalDays[i].substring(4,6))
         contains = 1
       }
     }
-    if(contains == 0){
-      results.push(parseInt(totalDays[i].substring(4,6)))
-    }
+    
   }
-  console.log(results)
+  if((contains == 0) && (monthNames[month] === totalDays[i].substring(0,3)) ){
+    results.push(parseInt(totalDays[i].substring(4,6)))
+  }
+}
+  //console.log(results)
   return(results)
 }
 
@@ -58,7 +65,7 @@ const getDates = (data) => {
           />
       </View>
     <View style={styles.container35}>
-    <Text style={styles.text}>Days Completing a task  {"\n"}{(props.achievements == undefined) ? console.log("Achievements still loading") : getDates(props.achievements).length} </Text>
+    <Text style={styles.text}>Days Completing a task  {"\n"}{(props.achievements == undefined) ? console.log("Achievements still loading") : (getDates(props.achievements).length -1)} </Text>
       <Text style={styles.text}>Days Target Goal {"\n"} 25</Text>
       <Text style={styles.text}>Overall Tasks Completed  {"\n"}{(props.achievements == undefined) ? console.log("Achievements still loading") : props.achievements[0].total_exp}  </Text>
       

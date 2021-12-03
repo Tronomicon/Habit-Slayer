@@ -6,7 +6,7 @@ import * as Progress from 'react-native-progress';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { firestoreConnect } from 'react-redux-firebase'
-import { Award, EmojiHappy, More } from 'iconsax-react-native';
+import { Award, ChartCircle, EmojiHappy, More } from 'iconsax-react-native';
 import {
   Menu,
   MenuOptions,
@@ -26,6 +26,8 @@ function Settings(props) {
 
     const image = { uri: "https://cdn.discordapp.com/attachments/548321795170631690/911815781275275315/door.jpg"}
     const image2 = { uri: "https://blenderartists.org/uploads/default/original/4X/5/d/b/5db923e0e6dd4c057e281775bdf4c3d1a6676787.png"}
+   // const currentLevel = (Math.floor(parseInt(data[0].total_exp)%10)/ 10)
+
 
     const getLevel = (data) => {
       const total_exp = data[0].total_exp
@@ -36,15 +38,40 @@ function Settings(props) {
         result
       )
     }
-
+    
     const getProgressExp = (data) => {
       const total_exp = data[0].total_exp
       const level = parseInt(total_exp)
-      const result = (Math.floor(level%10)/ 10)
+      const result = (Math.floor(level%10)/ 20)
       return (
         result
       )
     }
+
+    const getEvolveDate = (data) => {
+      if ( (Math.floor(parseInt(data[0].total_exp)/10)) > 5 ){
+
+        return <MenuOption onSelect={() => Alert.alert(
+        "",
+        "November 30th 2021",
+        [
+          { text: "OK", onPress: () => console.log("OK Pressed") }
+        ]
+      )} text='Date Of Accomplishment' />
+      }
+      
+    }
+
+    const getEvolve = (data) => {
+      console.log("Leveling " + (Math.floor(parseInt(data[0].total_exp)/10)))
+      if ( (Math.floor(parseInt(data[0].total_exp)/10)) > 5 ){
+        console.log("leveledup")
+        return  <ChartCircle color="#37d67a" variant="Broken" size={54} />
+      }
+      else
+        return <More color="#808080" variant="Broken" size={54} />
+    }
+
 
   return (
     <ImageBackground
@@ -171,7 +198,8 @@ function Settings(props) {
           </View>
 
           <View style={styles.iconContainer}>
-            <More color="#808080" variant="Broken" size={54} />
+          { (props.achievements == undefined) ? console.log("Achievements still loading") : getEvolve(props.achievements)}
+            
             <Menu>
               <MenuTrigger text='Evolving' />
               <MenuOptions>
@@ -182,6 +210,7 @@ function Settings(props) {
                     { text: "OK", onPress: () => console.log("OK Pressed") }
                   ]
                 )} text='Info' />
+                { (props.achievements == undefined) ? console.log("Achievements still loading") : getEvolveDate(props.achievements)}
               </MenuOptions>
             </Menu>
           </View>
